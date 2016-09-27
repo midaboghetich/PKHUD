@@ -10,16 +10,16 @@
 import UIKit
 
 /// PKHUDAssets provides a set of default images, that can be supplied to the PKHUD's content views.
-open class PKHUDAssets: NSObject {
+public class PKHUDAssets: NSObject {
     
-    open class var crossImage: UIImage { return PKHUDAssets.bundledImage(named: "cross") }
-    open class var checkmarkImage: UIImage { return PKHUDAssets.bundledImage(named: "checkmark") }
-    open class var progressActivityImage: UIImage { return PKHUDAssets.bundledImage(named: "progress_activity") }
-    open class var progressCircularImage: UIImage { return PKHUDAssets.bundledImage(named: "progress_circular") }
+    public class var crossImage: UIImage { return PKHUDAssets.bundledImage(named: "cross") }
+    public class var checkmarkImage: UIImage { return PKHUDAssets.bundledImage(named: "checkmark") }
+    public class var progressActivityImage: UIImage { return PKHUDAssets.bundledImage(named: "progress_activity") }
+    public class var progressCircularImage: UIImage { return PKHUDAssets.bundledImage(named: "progress_circular") }
     
     internal class func bundledImage(named name: String) -> UIImage {
-        let bundle = Bundle(for: PKHUDAssets.self)
-        let image = UIImage(named: name, in:bundle, compatibleWith:nil)
+        let bundle = NSBundle(forClass: PKHUDAssets.self)
+        let image = UIImage(named: name, inBundle:bundle, compatibleWithTraitCollection:nil)
         if let image = image {
             return image
         }

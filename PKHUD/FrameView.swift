@@ -13,7 +13,7 @@ import UIKit
 internal class FrameView: UIVisualEffectView {
     
     internal init() {
-        super.init(effect: UIBlurEffect(style: .light))
+        super.init(effect: UIBlurEffect(style: .Light))
         commonInit()
     }
 
@@ -22,7 +22,7 @@ internal class FrameView: UIVisualEffectView {
         commonInit()
     }
     
-    fileprivate func commonInit() {
+    private func commonInit() {
         backgroundColor = UIColor(white: 0.8, alpha: 0.36)
         layer.cornerRadius = 9.0
         layer.masksToBounds = true
@@ -31,11 +31,11 @@ internal class FrameView: UIVisualEffectView {
         
         let offset = 20.0
         
-        let motionEffectsX = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        let motionEffectsX = UIInterpolatingMotionEffect(keyPath: "center.x", type: .TiltAlongHorizontalAxis)
         motionEffectsX.maximumRelativeValue = offset
         motionEffectsX.minimumRelativeValue = -offset
         
-        let motionEffectsY = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        let motionEffectsY = UIInterpolatingMotionEffect(keyPath: "center.y", type: .TiltAlongVerticalAxis)
         motionEffectsY.maximumRelativeValue = offset
         motionEffectsY.minimumRelativeValue = -offset
         
@@ -45,7 +45,7 @@ internal class FrameView: UIVisualEffectView {
         addMotionEffect(group)
     }
     
-    fileprivate var _content = UIView()
+    private var _content = UIView()
     internal var content: UIView {
         get {
             return _content
@@ -55,7 +55,7 @@ internal class FrameView: UIVisualEffectView {
             _content = newValue
             _content.alpha = 0.85
             _content.clipsToBounds = true
-            _content.contentMode = .center
+            _content.contentMode = .Center
             frame.size = _content.bounds.size
             addSubview(_content)
         }

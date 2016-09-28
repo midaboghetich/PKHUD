@@ -18,16 +18,16 @@ class DemoViewController: UIViewController {
         HUD.allowsInteraction = false
     }
 
-    @IBAction func showAnimatedSuccessHUD(sender: AnyObject) {
+    @IBAction func showAnimatedSuccessHUD(_ sender: AnyObject) {
         HUD.flash(.Success, delay: 2.0)
     }
     
-    @IBAction func showAnimatedErrorHUD(sender: AnyObject) {
+    @IBAction func showAnimatedErrorHUD(_ sender: AnyObject) {
         HUD.show(.Error)
         HUD.hide(afterDelay: 2.0)
     }
     
-    @IBAction func showAnimatedProgressHUD(sender: AnyObject) {
+    @IBAction func showAnimatedProgressHUD(_ sender: AnyObject) {
         HUD.show(.Progress)
         
         // Now some long running task starts...
@@ -37,15 +37,15 @@ class DemoViewController: UIViewController {
         }
     }
     
-    @IBAction func showCustomProgressHUD(sender: AnyObject) {
+    @IBAction func showCustomProgressHUD(_ sender: AnyObject) {
         HUD.flash(.RotatingImage(UIImage(named: "progress")), delay: 2.0)
     }
     
-    @IBAction func showAnimatedStatusProgressHUD(sender: AnyObject) {
+    @IBAction func showAnimatedStatusProgressHUD(_ sender: AnyObject) {
         HUD.flash(.LabeledProgress(title: "Title", subtitle: "Subtitle"), delay: 2.0)
     }
     
-    @IBAction func showTextHUD(sender: AnyObject) {
+    @IBAction func showTextHUD(_ sender: AnyObject) {
         HUD.flash(.Label("Requesting Licence…"), delay: 2.0) { _ in
             print("License Obtained.")
         }
@@ -61,20 +61,16 @@ class DemoViewController: UIViewController {
     PKHUD.sharedHUD.hide(afterDelay: 2.0)
     */
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.AllButUpsideDown
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.allButUpsideDown
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
 }
